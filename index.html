@@ -16,22 +16,36 @@
             padding: 8px;
             text-align: left;
         }
+        thead {
+            background-color: #f2f2f2;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <h1>GC dist. by year</h1>
     <table>
+        <caption>GC dist. by year</caption>
         <thead>
             <tr>
-                <th>MM</th>
-                <th>YYYY</th>
-                <th>R0 (kpc)</th>
-                <th>Stat.</th>
-                <th>Syst</th>
-                <th>References</th>
+                <th scope="col">MM</th>
+                <th scope="col">YYYY</th>
+                <th scope="col">R0 (kpc)</th>
+                <th scope="col">Stat.</th>
+                <th scope="col">Syst</th>
+                <th scope="col">References</th>
             </tr>
         </thead>
-        
+
         <tbody>
             <tr>
                 <td>1</td>
