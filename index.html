@@ -6,7 +6,7 @@
     <title>Data Table</title>
     <style>
         table {
-            width: 100%;
+            width: 90%;
             border-collapse: collapse;
         }
         table, th, td {
@@ -34,15 +34,17 @@
 <body>
     <h1>GC dist. by year</h1>
     <table>
-        <caption>GC dist. by year</caption>
         <thead>
             <tr>
-                <th scope="col">MM</th>
-                <th scope="col">YYYY</th>
-                <th scope="col">R0 (kpc)</th>
-                <th scope="col">Stat.</th>
-                <th scope="col">Syst</th>
-                <th scope="col">References</th>
+                <th rowspan="2">MM</th>
+                <th rowspan="2">YYYY</th>
+                <th rowspan="2">R0 (kpc)</th>
+                <th colspan="2">Error</th>
+                <th rowspan="2">References</th>
+            </tr>
+            <tr>
+                <th>Stat.</th>
+                <th>Syst.</th>
             </tr>
         </thead>
 
