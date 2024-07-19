@@ -445,7 +445,7 @@
         }
 
         // Завантаження CSV файлу
-        var csvFile = new Blob([tsv.join("\n")], { type: "text/tsv" });
+        var csvFile = new Blob([tsv.join("\n")], { type: "text/tsv;charset=utf-8"});
         var downloadLink = document.createElement("a");
         downloadLink.download = "table_data.tsv";  // Зміна розширення на .tsv
         downloadLink.href = window.URL.createObjectURL(csvFile);
