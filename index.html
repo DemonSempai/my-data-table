@@ -423,10 +423,10 @@
         </tbody>
     </table>
     
-    <button onclick="downloadCSV()">Download CSV</button>
+    <button onclick="downloadTSV()">Download CSV</button>
 
     <script>
-        function downloadCSV() {
+    function downloadCSV() {
         var csv = [];
         var rows = document.querySelectorAll("#data-table tr");
 
@@ -436,13 +436,13 @@
         for (var j = 0; j < cols.length; j++) 
             row.push(cols[j].innerText);
         
-        csv.push(row.join(","));        
-    }
+        csv.push(row.join("\t"));  // Використання табуляції як розділювача
+        }
 
         // Download CSV file
-        var csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+        var csvFile = new Blob([csv.join("\n")], { type: "text/tsv" });
         var downloadLink = document.createElement("a");
-        downloadLink.download = "table_data.csv";
+        downloadLink.download = "table_data.tsv";  // Зміна розширення на .tsv
         downloadLink.href = window.URL.createObjectURL(csvFile);
         downloadLink.style.display = "none";
         document.body.appendChild(downloadLink);
