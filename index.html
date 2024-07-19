@@ -438,8 +438,8 @@
         for (var i = 1; i < rows.length; i++) {  // Початок з 1, щоб пропустити перший рядок заголовків таблиці
             var row = [], cols = rows[i].querySelectorAll("td");
         
-        for (var j = 0; j < cols.length; j++) 
-            row.push(cols[j].innerText);
+            for (var j = 0; j < cols.length; j++) 
+                row.push(cols[j].innerText);
         
             csv.push(row.join("\t"));  // Використання табуляції як розділювача
         }
