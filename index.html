@@ -426,20 +426,25 @@
     <button onclick="downloadTSV()">Download TSV</button>
 
     <script>
-    function downloadTSV() {
+    function downloadCSV() {
         var csv = [];
         var rows = document.querySelectorAll("#data-table tr");
 
-        for (var i = 0; i < rows.length; i++) {
-            var row = [], cols = rows[i].querySelectorAll("td, th");
+        // Додавання заголовків вручну
+        var headers = ["MM", "YYYY", "R0 (kpc)", "Stat.", "Syst.", "References"];
+        csv.push(headers.join("\t"));  // Використання табуляції як розділювача
+
+        // Додавання даних таблиці
+        for (var i = 1; i < rows.length; i++) {  // Початок з 1, щоб пропустити перший рядок заголовків таблиці
+            var row = [], cols = rows[i].querySelectorAll("td");
         
         for (var j = 0; j < cols.length; j++) 
             row.push(cols[j].innerText);
         
-        csv.push(row.join("\t"));  // Використання табуляції як розділювача
+            csv.push(row.join("\t"));  // Використання табуляції як розділювача
         }
 
-        // Download CSV file
+        // Завантаження CSV файлу
         var csvFile = new Blob([csv.join("\n")], { type: "text/tsv" });
         var downloadLink = document.createElement("a");
         downloadLink.download = "table_data.tsv";  // Зміна розширення на .tsv
