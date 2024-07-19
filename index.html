@@ -435,7 +435,7 @@
         tsv.push(headers.join("\t"));  // Використання табуляції як розділювача
 
         // Додавання даних таблиці
-        for (var i = 0; i < rows.length; i++) {  // Початок з 1, щоб пропустити перший рядок заголовків таблиці
+        for (var i = 2; i < rows.length; i++) {  // Початок з 1, щоб пропустити перший рядок заголовків таблиці
             var row = [], cols = rows[i].querySelectorAll("td");
         
             for (var j = 0; j < cols.length; j++) 
