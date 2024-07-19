@@ -420,10 +420,89 @@
                 Oyama, T., “Trigonometric parallax and proper motion of Sagittarius A* measured by VERA using the new broad-band back-end system OCTAVE-DAS”
                 </td>
             </tr>            
-
-
-            
         </tbody>
     </table>
+
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <script>
+        function calculateAverage() {
+            var table = document.getElementById("dataTable");
+            var tbody = table.getElementsByTagName("tbody")[0];
+            var rows = tbody.getElementsByTagName("tr");
+            var sum = 0;
+            var count = 0;
+
+            for (var i = 0; i < rows.length; i++) {
+                var cell = rows[i].getElementsByTagName("td")[2];
+                var value = parseFloat(cell.textContent);
+                if (!isNaN(value)) {
+                    sum += value;
+                    count++;
+                }
+            }
+
+            var avg = sum / count;
+            document.getElementById("avgR0").textContent = avg.toFixed(2);
+        }
+
+        function createChart() {
+            var table = document.getElementById("dataTable");
+            var tbody = table.getElementsByTagName("tbody")[0];
+            var rows = tbody.getElementsByTagName("tr");
+
+            var labels = [];
+            var data = [];
+
+            for (var i = 0; i < rows.length; i++) {
+                var yearCell = rows[i].getElementsByTagName("td")[1];
+                var valueCell = rows[i].getElementsByTagName("td")[2];
+
+                var year = yearCell.textContent;
+                var value = parseFloat(valueCell.textContent);
+
+                if (!isNaN(value)) {
+                    labels.push(year);
+                    data.push(value);
+                }
+            }
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'R0 (kpc)',
+                        data: data,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Year'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'R0 (kpc)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        calculateAverage();
+        createChart();
+    </script>
 </body>
 </html>
