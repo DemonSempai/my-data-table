@@ -30,11 +30,10 @@
             text-decoration: underline;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>GC distance by year</h1>
-    <table>
+     <table id="data-table">
         <thead>
             <tr>
                 <th rowspan="2">MM</th>
@@ -423,87 +422,32 @@
             </tr>            
         </tbody>
     </table>
-
-    <canvas id="myChart" width="400" height="200"></canvas>
+    
+    <button onclick="downloadCSV()">Download CSV</button>
 
     <script>
-        function calculateAverage() {
-            var table = document.getElementById("dataTable");
-            var tbody = table.getElementsByTagName("tbody")[0];
-            var rows = tbody.getElementsByTagName("tr");
-            var sum = 0;
-            var count = 0;
+        function downloadCSV() {
+            var csv = [];
+            var rows = document.querySelectorAll("table tr");
 
             for (var i = 0; i < rows.length; i++) {
-                var cell = rows[i].getElementsByTagName("td")[2];
-                var value = parseFloat(cell.textContent);
-                if (!isNaN(value)) {
-                    sum += value;
-                    count++;
-                }
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                
+                for (var j = 0; j < cols.length; j++) 
+                    row.push('"' + cols[j].innerText + '"');
+                
+                csv.push(row.join(","));        
             }
 
-            var avg = sum / count;
-            document.getElementById("avgR0").textContent = avg.toFixed(2);
+            // Download CSV file
+            var csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+            var downloadLink = document.createElement("a");
+            downloadLink.download = "table_data.csv";
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
         }
-
-        function createChart() {
-            var table = document.getElementById("dataTable");
-            var tbody = table.getElementsByTagName("tbody")[0];
-            var rows = tbody.getElementsByTagName("tr");
-
-            var labels = [];
-            var data = [];
-
-            for (var i = 0; i < rows.length; i++) {
-                var yearCell = rows[i].getElementsByTagName("td")[1];
-                var valueCell = rows[i].getElementsByTagName("td")[2];
-
-                var year = yearCell.textContent;
-                var value = parseFloat(valueCell.textContent);
-
-                if (!isNaN(value)) {
-                    labels.push(year);
-                    data.push(value);
-                }
-            }
-
-            var ctx = document.getElementById('myChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'R0 (kpc)',
-                        data: data,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                        fill: false
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Year'
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'R0 (kpc)'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        calculateAverage();
-        createChart();
     </script>
 </body>
 </html>
