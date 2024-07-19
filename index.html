@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Table</title>
+    <title>GCdistbyyear</title>
     <style>
         table {
-            width: 90%;
+            width: 95%;
             border-collapse: collapse;
         }
         table, th, td {
-            border: 1px solid black;
+            border: 0.5px solid black;
         }
         th, td {
-            padding: 4px;
+            padding: 2px;
             text-align: left;
         }
         thead {
@@ -447,7 +447,7 @@
         // Завантаження CSV файлу
         var csvFile = new Blob([tsv.join("\n")], { type: "text/tsv;charset=utf-8"});
         var downloadLink = document.createElement("a");
-        downloadLink.download = "table_data.tsv";  // Зміна розширення на .tsv
+        downloadLink.download = "GCdistbyyear.tsv";  // Зміна розширення на .tsv
         downloadLink.href = window.URL.createObjectURL(csvFile);
         downloadLink.style.display = "none";
         document.body.appendChild(downloadLink);
