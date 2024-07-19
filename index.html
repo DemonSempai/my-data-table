@@ -427,25 +427,25 @@
 
     <script>
     function downloadTSV() {
-        var csv = [];
+        var tsv = [];
         var rows = document.querySelectorAll("#data-table tr");
 
         // Додавання заголовків вручну
         var headers = ["MM", "YYYY", "R0 (kpc)", "Stat.", "Syst.", "References"];
-        csv.push(headers.join("\t"));  // Використання табуляції як розділювача
+        tsv.push(headers.join("\t"));  // Використання табуляції як розділювача
 
         // Додавання даних таблиці
-        for (var i = 1; i < rows.length; i++) {  // Початок з 1, щоб пропустити перший рядок заголовків таблиці
+        for (var i = 0; i < rows.length; i++) {  // Початок з 1, щоб пропустити перший рядок заголовків таблиці
             var row = [], cols = rows[i].querySelectorAll("td");
         
             for (var j = 0; j < cols.length; j++) 
                 row.push(cols[j].innerText);
         
-            csv.push(row.join("\t"));  // Використання табуляції як розділювача
+            tsv.push(row.join("\t"));  // Використання табуляції як розділювача
         }
 
         // Завантаження CSV файлу
-        var csvFile = new Blob([csv.join("\n")], { type: "text/tsv" });
+        var csvFile = new Blob([tsv.join("\n")], { type: "text/tsv" });
         var downloadLink = document.createElement("a");
         downloadLink.download = "table_data.tsv";  // Зміна розширення на .tsv
         downloadLink.href = window.URL.createObjectURL(csvFile);
